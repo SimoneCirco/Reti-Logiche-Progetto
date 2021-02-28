@@ -1,0 +1,28 @@
+import numpy as np
+def equalizator1(a: int, b: int):
+    input_pixel = np.random.randint(low=50, high=101, size=(a*b))
+    min_pixel = 255
+    max_pixel = 0
+    for pixel in input_pixel:
+        print(pixel)
+        if(pixel>max_pixel):
+            max_pixel = pixel
+        if(pixel < min_pixel):
+            min_pixel = pixel
+    
+    delta_value = max_pixel-min_pixel
+    shift_level =(8-np.floor(np.log2(delta_value+1)))
+    print("conversione:")
+    i=0
+    for pixel in input_pixel:
+        i+=1
+        diff= pixel-min_pixel
+        temp_pixel = np.left_shift(pixel- min_pixel, int(shift_level))
+        if(temp_pixel > 255):
+            new_pixel = 255
+        else:
+            new_pixel = temp_pixel
+        print("{}_decimale:".format(i) , new_pixel, "               {}_esadecimale".format(i) , np.base_repr(new_pixel, base=16))
+        
+
+equalizator1(2,2)
